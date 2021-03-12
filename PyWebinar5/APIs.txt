@@ -1,0 +1,46 @@
+1. curl command(s) to obtain list of deices for ACI ( ACI sandbox: https://sandboxapicem.cisco.com/ username: devnetuser, password: Cisco123!)
+
+a) get ACI ticket
+curl --location --request POST 'https://sandboxapicem.cisco.com/api/v1/ticket' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic ZGV2bmV0dXNlcjpDaXNjbzEyMyE=' \
+--header 'Cookie: _apic-em=s%3AUdqnjSqx4KE-VeZbSGYXY-Gx1tX7Xiyz.f20cmUGKwoY2p3UWDhQRg4Cwz7K3zgXDfYTtZDB8iV0' \
+--data-raw ' {
+ "username" : "devnetuser",
+ "password" : "Cisco123!"
+ }'
+
+b) get list of devices
+curl --location --request GET 'https://sandboxapicem.cisco.com/api/v1/network-device' \
+--header 'X-AUTH-TOKEN: ST-2940-pZCDd91qOASQofa4rMcz-cas' \
+--header 'Cookie: _apic-em=s%3AUdqnjSqx4KE-VeZbSGYXY-Gx1tX7Xiyz.f20cmUGKwoY2p3UWDhQRg4Cwz7K3zgXDfYTtZDB8iV0'
+
+----------------------------------------------------------------------------
+
+2. curl command(s) to obtain list of clients from DNA (DNA sandbox: https://sandboxdnac.cisco.com, username: devnetuser, password: Cisco123!)
+
+a) get DNA token
+curl --location --request POST 'https://sandboxdnac.cisco.com/api/system/v1/auth/token' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic ZGV2bmV0dXNlcjpDaXNjbzEyMyE=' \
+--data-raw ' {
+ "username" : "devnetuser",
+ "password" : "Cisco123!"
+ }'
+
+b) get list of clients
+curl --location --request GET 'https://sandboxdnac.cisco.com/api/v1/network-device' \
+--header 'x-auth-token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDJjMGUyODE0NzEwYTIyZDFmN2UxNzIiLCJhdXRoU291cmNlIjoiaW50ZXJuYWwiLCJ0ZW5hbnROYW1lIjoiVE5UMCIsInJvbGVzIjpbIjYwMmJlYmU1MTQ3MTBhMDBjOThmYTQwOSJdLCJ0ZW5hbnRJZCI6IjYwMmJlYmU1MTQ3MTBhMDBjOThmYTQwMiIsImV4cCI6MTYxNTU2NTQzMiwiaWF0IjoxNjE1NTYxODMyLCJqdGkiOiIzNmYzM2Y2Yi0yYTJlLTQwODMtYWFiMS05MzMwNjRlYjk5YTEiLCJ1c2VybmFtZSI6ImRldm5ldHVzZXIifQ.Y_frIf9voDZgsicqKq9_zzb8FDE2Vw9F8siwA0W6XKgwusweOJ3TYQuPkpqC1gf2M-MsNmZZ9o5k4MC08U6hkwKMyE0WLXDAeuFW39lgJ3mi4fMxihRhKJ8tKlj4RdFIyeLjjSRGdo1jTMWLuJTnx4w3_iXyrKOnAvuEZJQbS0OczQbmC4YiNaNmWXIYoY_wXEqmYSOszdW-9Uf6SdD4eibMZenMpEGGvUsMc2JNmHZdk4QSXhgP6TRL7ieqS7WuapQlekIzC4PqNPEEb-8vtj9sVgg8FXQz5ruqxEpOyt0_HJbYc11z5IbrhGlW4v9B83TOgMrfnoKpTmR8G1UHCg' \
+--header 'Authorization: Basic ZGV2bmV0dXNlcjpDaXNjbzEyMyE='
+
+----------------------------------------------------------------------------
+
+3. curl command(s) to obtain list of hosts in Meraki for organization with  "name": "DevNet Sandbox" and network with  "name": "DevNet Sandbox ALWAYS ON"( Meraki base URL: https://api.meraki.com/api/v0 (Links to an external site.) , Meraki API-Key: 6bec40cf957de430a6f1f2baa056b99a4fac9ea0)
+
+a) get all organizations (to find DevNet Sandbox ID)
+curl --location --request GET 'https://api.meraki.com/api/v1/organizations' \
+--header 'X-Cisco-Meraki-API-Key: 6bec40cf957de430a6f1f2baa056b99a4fac9ea0'
+
+b) get list of hosts with Devnet Sanbox Organization (with ID = 549236)
+curl --location --request GET 'https://api.meraki.com/api/v1/organizations/549236/inventoryDevices' \
+--header 'X-Cisco-Meraki-API-Key: 6bec40cf957de430a6f1f2baa056b99a4fac9ea0'
